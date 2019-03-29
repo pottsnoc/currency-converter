@@ -10,7 +10,7 @@ const HomePage = (props) => {
             <h1>Курсы валют на {day}</h1>
             <table className='table table-striped table-hover'>
                 <tbody>
-                    {Object.values(props.currencies).map(items)}
+                    {props.currencies.map(items)}
                 </tbody>
             </table>
         </div>
@@ -18,13 +18,15 @@ const HomePage = (props) => {
 }
 
 const items = (currency) => {
-    const gap = currency.Value - currency.Previous;
-    const arrowStyle = gap > 0 ? 'fa fa-sort-asc' : 'fa fa-sort-desc';
+    if(currency.base) return null;
+    const gap = currency.value - currency.previous;
+    const arrowStyle = gap > 0 ? 'fa fa-sort-asc' : 
+                       gap < 0 ? 'fa fa-sort-desc' : 'fa fa-caret-right';
     return (
-        <tr key={currency.ID}>
-            <td>{currency.CharCode}</td>
-            <td>{currency.Name}</td>
-            <td>{currency.Value.toFixed(2)}</td>
+        <tr key={currency.id}>
+            <td>{currency.charCode}</td>
+            <td>{currency.name}</td>
+            <td>{currency.value.toFixed(2)}</td>
             <td className='text-right'>
                 <span>{gap.toFixed(2)} </span>
                 <i className={arrowStyle} aria-hidden='true'></i> 
