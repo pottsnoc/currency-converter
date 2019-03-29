@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import Header from '../Header';
+import Spinner from '../Spinner';
 import {HomePage, ConverterPage} from '../pages';
 import * as actions from '../../actions';
 import CurrencyDataService from '../../services/currency-data-service';
@@ -22,6 +23,7 @@ class App extends React.Component {
                })
     }
     render() {
+        if(this.props.loading) return <Spinner />;
         return(
             <Router>
                 <div>
@@ -37,4 +39,5 @@ class App extends React.Component {
     
 }
 
-export default connect()(App);
+const mapStateToProps = ({loading, error}) => ({loading, error});
+export default connect(mapStateToProps)(App);
