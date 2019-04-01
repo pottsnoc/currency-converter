@@ -23,6 +23,12 @@ const reducer = (state=initialState, action) => {
                 error: true,
                 loading: false,
             }
+        case 'CHANGE_BASE_CURRENCY':
+            return {
+                currencies: action.payload,
+                error: false,
+                loading: false,
+            }
         default:
             return state;
     }

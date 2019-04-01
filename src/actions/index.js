@@ -15,4 +15,20 @@ const currencyFailed = (err) => {
         payload: err
     }
 }
-export {currencyRequest, currencyLoaded, currencyFailed}
+const changeBaseCurrency = (currencies, target) => {
+    const currentBase = currencies.find(item => item.base);
+    const targetBase = currencies.find(item => item.charCode === target);
+    const result = currencies.map(item => {
+        return {
+            ...item,
+            value: currentBase.value * item.value / targetBase.value,
+            previous: currentBase.previous * item.previous / targetBase.previous,
+            base: item === targetBase ? true : null,
+        };
+    });
+    return {
+        type: 'CHANGE_BASE_CURRENCY',
+        payload: result
+    }
+}
+export {currencyRequest, currencyLoaded, currencyFailed, changeBaseCurrency};

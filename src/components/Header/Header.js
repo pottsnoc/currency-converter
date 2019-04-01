@@ -1,37 +1,59 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
+import {connect} from 'react-redux';
+import Select from 'react-select';
+import PerfectScrollBar from 'react-perfect-scrollbar';
 
+import {changeBaseCurrency} from '../../actions';
 import './header.css';
+import "react-perfect-scrollbar/dist/css/styles.css";
 
-const Header = () => {
+const Header = (props) => {
+    const changeBase = (input) => {
+        props.dispatch(changeBaseCurrency(props.currencies, input.value));
+    }
+    const options = props.currencies.map(item => ({label: item.charCode, value: item.charCode, base: item.base}));
+    const base = options.find(item => item.base);
     return(
         <header className='header'>
-            <nav className='container'>
-                <ul>
-                    <li className='header-nav-item'>
-                        <NavLink 
-                            to='/' 
-                            className='header-nav-link' 
-                            activeClassName='active' 
-                            exact
-                        >
-                            Главная
-                        </NavLink>
-                    </li>
-                    <li className='header-nav-item'>
-                        <NavLink 
-                            to='/converter' 
-                            className='header-nav-link' 
-                            activeClassName='active' 
-                            exact
-                        >
-                            Конвертер
-                        </NavLink>
-                    </li>
-                </ul>
-            </nav>
+            <div className='container d-flex justify-content-between'>
+                <Select options={options} components={{MenuList}}  onChange={changeBase}
+                        styles={{container: base => ({...base, minWidth: '100px'})}} 
+                        defaultValue={base}/>
+                <nav>
+                    <ul>
+                        <li className='header-nav-item'>
+                            <NavLink 
+                                to='/' 
+                                className='header-nav-link' 
+                                activeClassName='active' 
+                                exact
+                            >
+                                Главная
+                            </NavLink>
+                        </li>
+                        <li className='header-nav-item'>
+                            <NavLink 
+                                to='/converter' 
+                                className='header-nav-link' 
+                                activeClassName='active' 
+                                exact
+                            >
+                                Конвертер
+                            </NavLink>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </header>
     )
 }
-
-export default Header;
+const MenuList = (props) => {
+    return (
+        <div style={{height: '300px'}}>
+            <PerfectScrollBar>{props.children}</PerfectScrollBar>
+        </div>
+    )
+}
+const mapStateToProps = ({currencies}) => ({currencies})
+export default connect(mapStateToProps)(Header);
