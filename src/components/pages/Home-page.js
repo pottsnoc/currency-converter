@@ -26,9 +26,9 @@ const items = (currency) => {
         <tr key={currency.id}>
             <td>{currency.charCode}</td>
             <td>{currency.name}</td>
-            <td>{currency.value.toFixed(2)}</td>
+            <td>{currency.value.toFixed(4)}</td>
             <td className='text-right'>
-                <span>{gap.toFixed(2)} </span>
+                <span>{gap.toFixed(4)} </span>
                 <i className={arrowStyle} aria-hidden='true'></i> 
             </td>
         </tr>
