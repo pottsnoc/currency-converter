@@ -50,9 +50,10 @@ const Header = (props) => {
 }
 const MenuList = (props) => {
     return (
-        <div style={{height: '300px'}}>
-            <PerfectScrollBar>{props.children}</PerfectScrollBar>
-        </div>
+            <PerfectScrollBar style={{height: '300px'}} containerRef={ref => props.innerRef(ref)}>
+                {props.children}
+            </PerfectScrollBar>
+
     )
 }
 const mapStateToProps = ({currencies}) => ({currencies})
