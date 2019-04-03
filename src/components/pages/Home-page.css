@@ -4,3 +4,12 @@
 .fa-sort-desc {
     color: red;
 }
+.fa-star-o, .fa-star{
+    color: #fff200;
+}
+.currency-table td{
+    vertical-align: middle;
+}
+.button-cell {
+    width: 8%;
+}
