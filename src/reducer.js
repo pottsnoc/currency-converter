@@ -1,7 +1,7 @@
 const initialState = {
     currencies: [],
     error: false,
-    loading: false
+    loading: true
 }
 const reducer = (state=initialState, action) => {
     switch(action.type) {

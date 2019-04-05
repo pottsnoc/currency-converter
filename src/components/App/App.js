@@ -24,6 +24,7 @@ class App extends React.Component {
     }
     render() {
         if(this.props.loading) return <Spinner />;
+        if(this.props.error) return <div>error!</div>
         return(
             <Router>
                 <div>
