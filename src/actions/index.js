@@ -11,7 +11,7 @@ const currencyLoaded = (currencies) => {
 }
 const currencyFailed = (err) => {
     return {
-        type: 'FETCH_CURRENCIES_FAILED',
+        type: 'FETCH_CURRENCIES_FAILURE',
         payload: err
     }
 }

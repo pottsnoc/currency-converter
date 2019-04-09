@@ -20,7 +20,7 @@ const reducer = (state=initialState, action) => {
         case 'FETCH_CURRENCIES_FAILURE':
             return {
                 currencies: [],
-                error: true,
+                error: action.payload,
                 loading: false,
             }
         case 'EDIT_CURRENCIES': {
