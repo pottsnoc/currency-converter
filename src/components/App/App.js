@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 
 import Header from '../Header';
 import Spinner from '../Spinner';
-import ErrorIndicator from '../Error-Indicator';
 import {HomePage, ConverterPage} from '../pages';
 import * as actions from '../../actions';
 import CurrencyDataService from '../../services/currency-data-service';
@@ -25,7 +24,6 @@ class App extends React.Component {
     }
     render() {
         if(this.props.loading) return <Spinner />;
-        if(this.props.error) return <ErrorIndicator error={this.props.error}/>
         return(
             <Router>
                 <div>
