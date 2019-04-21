@@ -17,11 +17,24 @@ class App extends React.Component {
         service.getData()
                .then((data) => {
                     dispatch(actions.currencyLoaded(data));
+                    this.loadFromLocalStorage();
                })
                .catch((err) => {
                     dispatch(actions.currencyFailed(err));
-               })
+               });
     }
+    loadFromLocalStorage() {
+        const {dispatch, currencies} = this.props;
+        const {base, favs} = localStorage;
+        if(base) dispatch(actions.changeBaseCurrency(currencies, base));
+        if(favs) {
+            favs.split(',')
+                .forEach(item => {
+                    dispatch(actions.toggleCurrencyValueFav(this.props.currencies, item))
+                });
+        }
+    }
+
     render() {
         if(this.props.loading) return <Spinner />;
         return(
@@ -39,5 +52,5 @@ class App extends React.Component {
     
 }
 
-const mapStateToProps = ({loading, error}) => ({loading, error});
+const mapStateToProps = ({loading, error, currencies}) => ({loading, error, currencies});
 export default connect(mapStateToProps)(App);

@@ -26,35 +26,29 @@ const changeBaseCurrency = (currencies, target) => {
             base: item === targetBase ? true : null,
         };
     });
+    localStorage.setItem('base', targetBase.charCode);
     return {
         type: 'EDIT_CURRENCIES',
         payload: result
     }
 }
-const toggleCurrencyValueFav = (currencies, idx) => {
-    const target = {...currencies[idx]};
-    target.fav = target.fav ? null : true;
-    const result = currencies.map((item, i) => {
-        if(i === idx) {
+const toggleCurrencyValueFav = (currencies, charCode) => {
+    const result = currencies.map((item) => {
+        if(item.charCode === charCode) {
             item = Object.assign({}, item);
             item.fav = item.fav ? null : true; 
         }
         return item;
     })
-    const favs = sortByName(result.filter(a => a.fav));
-    const common = sortByName(result.filter(a => !a.fav));
+    const favs = result.filter(a => a.fav)
+                       .sort((a, b) => a.charCode > b.charCode ? 1 : -1);
+    const common = result.filter(a => !a.fav)
+                         .sort((a, b) => a.charCode > b.charCode ? 1 : -1);
+    localStorage.setItem('favs', favs.map(item => item.charCode));
     return {
         type: 'EDIT_CURRENCIES',
         payload: [...favs, ...common]
     }
-}
-
-const sortByName = (arr) => {
-    const res = arr.slice();
-    return res.sort((a, b) => {
-        if(a.charCode > b.charCode) return 1;
-        return -1;
-    })
 }
 
 export {currencyRequest, currencyLoaded, currencyFailed,

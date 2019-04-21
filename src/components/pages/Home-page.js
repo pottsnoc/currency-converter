@@ -17,7 +17,7 @@ class HomePage extends React.Component {
                 <tr key={currency.id}>
                     <td className='button-cell'>
                         <button className='btn btn-info btn-sm'
-                                onClick={() => dispatch(toggleCurrencyValueFav(currencies, idx))}>
+                                onClick={() => dispatch(toggleCurrencyValueFav(currencies, currency.charCode))}>
                             <i className={`fa ${currency.fav ? 'fa-star' : 'fa-star-o'}`} aria-hidden="true"></i>
                         </button>
                     </td>
