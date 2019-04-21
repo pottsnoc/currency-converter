@@ -56,9 +56,7 @@ class ConverterPage extends React.PureComponent {
     }
     updateCross() {
         this.setState(({firstSelected, secondSelected}) => {
-            return firstSelected.base ?
-                   {cross: secondSelected.value} :
-                   {cross: firstSelected.value / secondSelected.value};
+            return {cross: firstSelected.value / secondSelected.value};
         })
     }
     render() {
