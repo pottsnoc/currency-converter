@@ -2,6 +2,7 @@
     box-shadow: 0 2px 7px 0 rgba(0, 0, 0, .4);
     padding: 10px 0;
     margin-bottom: 30px;
+    background-color: #fff;
 }
 .header ul {
     list-style: none;

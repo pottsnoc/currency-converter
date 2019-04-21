@@ -10,16 +10,19 @@ import "react-perfect-scrollbar/dist/css/styles.css";
 
 const Header = (props) => {
     const changeBase = (input) => {
-        props.dispatch(changeBaseCurrency(props.currencies, input.value));
+        props.dispatch(changeBaseCurrency(props.currencies, input.charCode));
     }
-    const options = props.currencies.map(item => ({label: item.charCode, value: item.charCode, base: item.base}));
-    const base = options.find(item => item.base);
+    const options = props.currencies;
     return(
         <header className='header'>
             <div className='container d-flex justify-content-between'>
-                <Select options={options} components={{MenuList}}  onChange={changeBase}
+                <Select options={options}
+                        components={{MenuList}}
+                        onChange={changeBase}
                         styles={{container: base => ({...base, minWidth: '100px'})}} 
-                        defaultValue={base}/>
+                        getOptionLabel={option => option.charCode}
+                        getOptionValue={({charCode}) => charCode}
+                        value={options.find(item => item.base)}/>
                 <nav>
                     <ul>
                         <li className='header-nav-item'>

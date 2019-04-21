@@ -23,7 +23,7 @@ class HomePage extends React.Component {
                     </td>
                     <td>{currency.charCode}</td>
                     <td>{currency.name}</td>
-                    <td>{currency.value.toFixed(4)}</td>
+                    <td>{currency.value.toFixed(2)}</td>
                     <td className='text-right'>
                         <span>{gap.toFixed(4)} </span>
                         <i className={arrowStyle} aria-hidden='true'></i> 

@@ -7,6 +7,9 @@
 .fa-star-o, .fa-star{
     color: #fff200;
 }
+.currency-table {
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, .5);
+}
 .currency-table td{
     vertical-align: middle;
 }
