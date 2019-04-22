@@ -29,11 +29,10 @@ class ConverterPage extends React.PureComponent {
         this.updateValue(firstSelected.value, 'firstValue');
     }
     updateValue(value, target) {
-        if(!value) {
-            this.setState({[target]: value});
-            return;
+        if(!value || +value < 0) {
+            return value ? null : this.setState({[target]: value});
         }
-        const regexp = /^\d+[,.]?(\d{1,2})?/;
+        const regexp = /^-?\d+[,.]?(\d{1,2})?/;
         value = regexp.exec(value)[0];
         this.setState({[target]: value});
         this.convertCurrency(target);
@@ -44,7 +43,7 @@ class ConverterPage extends React.PureComponent {
             let convertValue = base === 'firstValue' ?
                                value * cross :
                                value / cross;
-            return {[invert[base]]: parseFloat(convertValue.toFixed(2))}
+            return {[invert[base]]: Math.round(convertValue * 100)/100}
         })
     }
     selectCurrency(option) {
