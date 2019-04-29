@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/currency-converter/static/js/2.eb713f47.chunk.js"
   },
   {
-    "revision": "81389574ab9eae1fce2a97552d433591",
+    "revision": "1edccb1d950a8943fd90f10a5315598c",
     "url": "/currency-converter/index.html"
   }
 ];
