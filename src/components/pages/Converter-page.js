@@ -10,8 +10,8 @@ class ConverterPage extends React.PureComponent {
         super();
         this.state = {
             options: [],
-            firstSelected: null,
-            secondSelected: null,
+            firstSelected: {},
+            secondSelected: {},
             firstValue: '',
             secondValue: '',
             cross: 0
@@ -21,7 +21,7 @@ class ConverterPage extends React.PureComponent {
         const options = this.props.currencies;
         const firstSelected = options.find(item => item.base);
         const secondSelected = options.find(item => !item.base);
-
+        
         this.setState({options,
                        firstSelected,
                        secondSelected});
@@ -68,6 +68,8 @@ class ConverterPage extends React.PureComponent {
             <div className='container'>
                 <div className='jumbotron'>
                     <h1>Конвертер валют</h1>
+                    <div>{firstValue} {firstSelected.name} равно</div>
+                    <div>{secondValue} {secondSelected.name}</div>
                 </div>
                 <div className='row'>
                     <div className='col-6 d-flex justify-content-between'>
