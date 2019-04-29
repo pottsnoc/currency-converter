@@ -38,7 +38,7 @@ class App extends React.Component {
     render() {
         if(this.props.loading) return <Spinner />;
         return(
-            <Router>
+            <Router basename={process.env.PUBLIC_URL}>
                 <div>
                     <Header />
                     <Switch>
