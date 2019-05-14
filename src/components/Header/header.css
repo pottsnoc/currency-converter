@@ -3,6 +3,7 @@
     padding: 10px 0;
     margin-bottom: 30px;
     background-color: #fff;
+    font-size: 14px;
 }
 .header ul {
     list-style: none;
@@ -11,10 +12,6 @@
     display: flex;
     justify-content: flex-end;
 }
-.header-nav-item {
-    margin-left: 20px;
-}
-
 .header-nav-link {
     text-decoration: none;
     display: block;
@@ -28,4 +25,12 @@
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, .4)inset;
     text-decoration: none;
     outline: none;
+}
+@media only screen and (min-width: 768px) {
+    .header {
+        font-size: 16px;
+    }
+    .header-nav-item {
+        margin-left: 20px;
+    }
 }

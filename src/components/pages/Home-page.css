@@ -1,3 +1,6 @@
+.home-page-title {
+    font-size: 20px;
+}
 .fa-sort-asc {
     color: green;
 }
@@ -9,10 +12,19 @@
 }
 .currency-table {
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, .5);
+    font-size: 14px;
 }
 .currency-table td{
     vertical-align: middle;
 }
 .button-cell {
     width: 8%;
+}
+@media only screen and (min-width: 768px) {
+    .currency-table {
+        font-size: 16px;
+    }
+    .home-page-title {
+        font-size: 35px;
+    }
 }

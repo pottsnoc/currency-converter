@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import BreakPoint from 'react-responsive';
 
 import {toggleCurrencyValueFav} from '../../actions';
 import './Home-page.css';
@@ -25,7 +26,9 @@ class HomePage extends React.Component {
                     <td>{currency.name}</td>
                     <td>{currency.value.toFixed(2)}</td>
                     <td className='text-right'>
-                        <span>{gap.toFixed(4)} </span>
+                        <BreakPoint minWidth={768}>
+                            <span>{gap.toFixed(4)} </span>
+                        </BreakPoint>
                         <i className={arrowStyle} aria-hidden='true'></i> 
                     </td>
                 </tr>
@@ -33,12 +36,29 @@ class HomePage extends React.Component {
         }
         return(
             <div className='container'>
-                <h1>Курсы валют на {day}</h1>
-                <table className='table table-striped table-hover currency-table'>
-                    <tbody>
-                        {currencies.map(items)}
-                    </tbody>
-                </table>
+                <h1 className='home-page-title'>Курсы валют на {day}</h1>
+                <BreakPoint minWidth={768}>
+                    {(matches) => {
+                          if (matches) {
+                            return (
+                                <table className='table table-striped table-hover currency-table'>
+                                    <tbody>
+                                        {currencies.map(items)}
+                                    </tbody>
+                                </table>
+                            );
+                          } else {
+                            return (
+                                <table className='table table-sm table-striped table-hover currency-table'>
+                                    <tbody>
+                                        {currencies.map(items)}
+                                    </tbody>
+                                </table>
+                            );
+                          }
+                        }
+                    }
+                </BreakPoint>
             </div>
         )
     }

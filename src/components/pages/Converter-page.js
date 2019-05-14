@@ -67,12 +67,12 @@ class ConverterPage extends React.PureComponent {
         return (
             <div className='container'>
                 <div className='jumbotron'>
-                    <h1>Конвертер валют</h1>
+                    <h1 className='converter-title'>Конвертер валют</h1>
                     <div>{firstValue} {firstSelected.name} равно</div>
                     <div>{secondValue} {secondSelected.name}</div>
                 </div>
                 <div className='row'>
-                    <div className='col-6 d-flex justify-content-between'>
+                    <div className='col-12 col-md-6 mb-3 mb-md-0 d-flex justify-content-between'>
                         <Select options={this.props.currencies}
                                 value={firstSelected}
                                 getOptionLabel={curr => curr.charCode}
@@ -85,7 +85,7 @@ class ConverterPage extends React.PureComponent {
                                 value={firstValue}
                                 onChange={e => this.updateValue(e.target.value, 'firstValue')}/>
                     </div>
-                    <div className='col-6 d-flex justify-content-between'>
+                    <div className='col-12 col-md-6 d-flex justify-content-between flex-row-reverse flex-md-row'>
                         <input className='converter-text-input' type='number'
                                 step='any'
                                 value={secondValue}
