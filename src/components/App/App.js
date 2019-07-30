@@ -6,6 +6,7 @@ import Header from '../Header';
 import Spinner from '../Spinner';
 import {HomePage, ConverterPage} from '../pages';
 import * as actions from '../../actions';
+import * as helpers from '../../helpers';
 import CurrencyDataService from '../../services/currency-data-service';
 
 const service = new CurrencyDataService();
@@ -16,23 +17,36 @@ class App extends React.Component {
         dispatch(actions.currencyRequest());
         service.getData()
                .then((data) => {
-                    dispatch(actions.currencyLoaded(data));
-                    this.loadFromLocalStorage();
+                    const edited = this.editData(data);
+                    dispatch(actions.currencyLoaded(edited));
                })
                .catch((err) => {
                     dispatch(actions.currencyFailed(err));
                });
     }
-    loadFromLocalStorage() {
-        const {dispatch, currencies} = this.props;
+    editData(data) {
         const {base, favs} = localStorage;
-        if(base) dispatch(actions.changeBaseCurrency(currencies, base));
-        if(favs) {
-            favs.split(',')
-                .forEach(item => {
-                    dispatch(actions.toggleCurrencyValueFav(this.props.currencies, item))
-                });
+        let result = data;
+        if(base) {
+            result = helpers.changeBaseCurrency(result, base);
         }
+        if(favs) {
+            const favList = favs.split(',')
+            result = result.map(item => {
+                if(favList.includes(item.charCode)) {
+                    item.fav = true;
+                }
+                return item;
+            }).sort((a, b) => {
+                if(a.fav && b.fav) { 
+                    return a.charCode > b.charCode ? 1 : -1;
+                }
+                return a.fav ? -1 : 
+                       b.fav ? 1 :
+                       a.charCode > b.charCode ? 1 : -1;
+            })
+        }
+        return result;
     }
 
     render() {

@@ -1,3 +1,5 @@
+import * as helpers from '../helpers'
+
 const currencyRequest = () => {
     return {
         type: 'FETCH_CURRENCIES_REQUEST'
@@ -16,16 +18,9 @@ const currencyFailed = (err) => {
     }
 }
 const changeBaseCurrency = (currencies, target) => {
-    const currentBase = currencies.find(item => item.base);
+    const result = helpers.changeBaseCurrency(currencies, target);
     const targetBase = currencies.find(item => item.charCode === target);
-    const result = currencies.map(item => {
-        return {
-            ...item,
-            value: currentBase.value * item.value / targetBase.value,
-            previous: currentBase.previous * item.previous / targetBase.previous,
-            base: item === targetBase ? true : null,
-        };
-    });
+
     localStorage.setItem('base', targetBase.charCode);
     return {
         type: 'EDIT_CURRENCIES',
@@ -36,10 +31,11 @@ const toggleCurrencyValueFav = (currencies, charCode) => {
     const result = currencies.map((item) => {
         if(item.charCode === charCode) {
             item = Object.assign({}, item);
-            item.fav = item.fav ? null : true; 
+            item.fav = item.fav ? false : true; 
         }
         return item;
-    })
+    });
+
     const favs = result.filter(a => a.fav)
                        .sort((a, b) => a.charCode > b.charCode ? 1 : -1);
     const common = result.filter(a => !a.fav)
